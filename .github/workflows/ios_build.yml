@@ -30,7 +30,7 @@ jobs:
 
       # Este comando compila el framework de iOS
       - name: Build iOS Framework
-        run: ./gradlew :composeApp:assembleDebugAppleFrameworkForXcode
+        run: ./gradlew :composeApp:assembleDebugAppleFrameworkForXcode --stacktrace --info
 
       # Opcional: Si quieres generar el archivo para Appetize.io
       - name: Build Simulator App
