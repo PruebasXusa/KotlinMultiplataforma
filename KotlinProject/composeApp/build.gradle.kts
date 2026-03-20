@@ -17,6 +17,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
+
     
     listOf(
         iosArm64(),
@@ -54,7 +55,7 @@ kotlin {
 
 
         androidMain.dependencies {
-            implementation(libs.compose.uiToolingPreview)
+        //    implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
         }
