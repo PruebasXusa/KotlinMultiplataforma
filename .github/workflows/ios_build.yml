@@ -35,3 +35,14 @@ jobs:
       # Opcional: Si quieres generar el archivo para Appetize.io
       - name: Build Simulator App
         run: ./gradlew :composeApp:iosSimulatorArm64Binaries
+
+      - name: Upload iOS App to Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-simulator-app
+          # Esta ruta puede variar según tu configuración de Kotlin, 
+          # pero normalmente está aquí:
+          path: |
+            **/build/bin/iosSimulatorArm64/debugExecutable/*.app
+          if-no-files-found: error
+
