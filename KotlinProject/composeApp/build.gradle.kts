@@ -136,3 +136,10 @@ compose.desktop {
         }
     }
 }
+
+tasks.register("assembleDebugAppleFrameworkForXcode") {
+    group = "build"
+    description = "Ensambla el framework de Debug para Xcode (compatibilidad)."
+    // Dependencia directa al task generado por KMP para el framework debug del simulador ARM64.
+    dependsOn(tasks.named("linkDebugFrameworkIosSimulatorArm64"))
+}
