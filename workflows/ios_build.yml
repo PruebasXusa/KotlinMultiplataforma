@@ -9,6 +9,10 @@ on:
 jobs:
   build:
     runs-on: macos-latest  # Esto le dice a GitHub que use un servidor Mac
+    defaults:
+      run:
+        working-directory: ./KotlinMultiplataforma
+  
     steps:
       - uses: actions/checkout@v4
 
