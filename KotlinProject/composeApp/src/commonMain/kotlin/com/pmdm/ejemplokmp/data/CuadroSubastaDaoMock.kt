@@ -6,9 +6,7 @@ import kotlinproject.composeapp.generated.resources.girl_with_pearl
 import kotlinproject.composeapp.generated.resources.guernica
 import kotlinproject.composeapp.generated.resources.mona_lisa
 import kotlinproject.composeapp.generated.resources.starry_night
-import kotlinproject.composeapp.generated.resources.the_birth_of_venus
 import kotlinproject.composeapp.generated.resources.the_creation_of_adam
-import kotlinproject.composeapp.generated.resources.the_kiss_klimt
 import kotlinproject.composeapp.generated.resources.the_persistence_of_memory
 import kotlinproject.composeapp.generated.resources.the_scream
 

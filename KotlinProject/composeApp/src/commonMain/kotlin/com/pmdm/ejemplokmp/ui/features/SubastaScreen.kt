@@ -34,10 +34,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import com.pmdm.ejemplokmp.ui.features.SubastaUiState
-import kotlinproject.composeapp.generated.resources.Res
-import kotlinproject.composeapp.generated.resources.girl_with_pearl
-import kotlinproject.composeapp.generated.resources.mona_lisa
-import kotlinproject.composeapp.generated.resources.the_scream
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
