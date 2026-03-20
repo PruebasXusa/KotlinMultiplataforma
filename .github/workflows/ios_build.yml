@@ -11,7 +11,7 @@ jobs:
     runs-on: macos-latest  # Esto le dice a GitHub que use un servidor Mac
     defaults:
       run:
-        working-directory: ./KotlinMultiplataforma
+        working-directory: KotlinProject
   
     steps:
       - uses: actions/checkout@v4
