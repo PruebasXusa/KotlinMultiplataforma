@@ -1,0 +1,70 @@
+# =========================
+# Kotlin / Gradle / KMP
+# =========================
+.gradle/
+**/build/
+!**/src/**/build/
+.gradletasknamecache
+.gradle.kts.cache
+.kotlin/
+**/.kotlin/
+
+# KMP / Compose / Kotlin Native
+**/composeApp/build/
+**/iosApp/build/
+**/shared/build/
+**/konan/
+**/*.klib
+**/*.kexe
+**/*.kmm/
+
+# =========================
+# Android
+# =========================
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+*.iml
+
+# Local Android SDK config
+local.properties
+
+# Android Studio generated
+captures/
+.externalNativeBuild/
+.cxx/
+
+# =========================
+# IntelliJ / Android Studio
+# =========================
+.idea/
+*.iws
+*.ipr
+out/
+
+# Optional: keep shared code style/settings if you use them
+# !.idea/codeStyles/
+# !.idea/inspectionProfiles/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Secrets / env
+# =========================
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+*.env
