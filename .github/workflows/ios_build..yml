@@ -14,7 +14,7 @@ jobs:
         working-directory: KotlinProject
   
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4 # clona el repositorio en runner
      
       - name: Make gradlew executable
         run: chmod +x ./gradlew
@@ -26,12 +26,37 @@ jobs:
           distribution: 'temurin'
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v3 # cofigura gradlew en el runner
 
-      # Este comando compila el framework de iOS
+      # Este comando compila el framework de iOS que luego se usa para enlazar la app
       - name: Build iOS Framework
         run: ./gradlew :composeApp:assembleDebugAppleFrameworkForXcode --stacktrace --info
 
       # Opcional: Si quieres generar el archivo para Appetize.io
       - name: Build Simulator App
         run: ./gradlew :composeApp:iosSimulatorArm64Binaries
+
+      - name: Build iOS Simulator App
+        run: |
+          # Limpiamos previews para evitar errores
+          rm -rf iosApp/iosApp/Preview\ Content
+        
+          # Compilar usando Xcode para cualquier simulador
+          xcodebuild build \
+            -project iosApp/iosApp.xcodeproj \
+            -scheme iosApp \
+            -configuration Debug \
+            -destination "platform=iOS Simulator" \
+            -derivedDataPath build/ios \
+            -sdk iphonesimulator \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            DEVELOPMENT_TEAM=""
+
+      - name: Upload iOS App to Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-simulator-app
+          path: "build/ios/Build/Products/Debug-iphonesimulator/*.app"
+          if-no-files-found: error
