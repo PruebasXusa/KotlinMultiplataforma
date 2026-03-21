@@ -56,7 +56,7 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             COMPILER_INDEX_STORE_ENABLE=NO \
-            ASSETCATALOG_COMPILER_SKIP_APP_ICON_VALIDATION=YES/
+            ASSETCATALOG_COMPILER_SKIP_APP_ICON_VALIDATION=YES \
             FRAMEWORK_SEARCH_PATHS='$(SRCROOT)/../composeApp/build/xcode-frameworks/debug/iphonesimulator'
 
       # 3. Subimos el .app resultante (el que Xcode empaquetó en derivedDataPath)
