@@ -42,9 +42,9 @@ jobs:
       # Añadimos clean y forzamos la arquitectura del simulador (arm64).
       - name: Build iOS app (Xcode)
         run: |
-         # Eliminamos carpetas de preview que suelen dar error en CI
-          rm -rf iosApp/iosApp/Preview\ Content
-
+        
+          # Eliminamos la carpeta de previews para evitar el fallo de validación
+          find . -name "Preview Content" -type d -exec rm -rf {} +
           xcodebuild build \
             -project iosApp/iosApp.xcodeproj \
             -scheme iosApp \
@@ -55,10 +55,12 @@ jobs:
             IPHONEOS_DEPLOYMENT_TARGET=15.0 \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
+            ENABLE_USER_SCRIPT_SANDBOXING=NO \
+            ENABLE_PREVIEWS=NO \
             COMPILER_INDEX_STORE_ENABLE=NO \
+            OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED=YES \
             ASSETCATALOG_COMPILER_SKIP_APP_ICON_VALIDATION=YES \
             FRAMEWORK_SEARCH_PATHS='$(SRCROOT)/../composeApp/build/xcode-frameworks/debug/iphonesimulator'
-
       # 3. Subimos el .app resultante (el que Xcode empaquetó en derivedDataPath)
       - name: Upload iOS App to Artifacts
         uses: actions/upload-artifact@v4
