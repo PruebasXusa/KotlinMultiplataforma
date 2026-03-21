@@ -12,37 +12,40 @@ jobs:
     defaults:
       run:
         working-directory: KotlinProject
-  
+
     steps:
-    
+      # 1. Checkout del código
       - uses: actions/checkout@v4
 
+      # 2. Seleccionamos Xcode 16.1
       - name: Select Xcode 16.1
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '16.1'
-     
+
+      # 3. Configuramos JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
+      # 4. Configuramos Gradle
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      # 5. Hacemos gradlew ejecutable
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      # 1. Generamos el framework que Xcode necesita para enlazar Compose
+      # 6. Generamos el framework Kotlin para iOS
       - name: Build Kotlin iOS Framework
         run: ./gradlew :composeApp:assembleDebugAppleFrameworkForXcode
 
-      # 2. Compilamos la App de iOS usando Xcode. 
-      # Añadimos clean y forzamos la arquitectura del simulador (arm64).
+      # 7. Compilamos la app de iOS usando Xcode (simulador)
       - name: Build iOS app (Xcode)
         run: |
-          # Eliminamos la carpeta de previews para evitar el fallo de validación
+          # Eliminamos la carpeta de previews para evitar fallo de validación
           rm -rf iosApp/iosApp/Preview\ Content
 
           xcodebuild build \
@@ -65,11 +68,12 @@ jobs:
             OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED=YES \
             ASSETCATALOG_COMPILER_SKIP_APP_ICON_VALIDATION=YES \
             DEVELOPMENT_ASSET_PATHS= \
-            FRAMEWORK_SEARCH_PATHS=$(SRCROOT)/../composeApp/build/xcode-frameworks/debug/iphonesimulator      # 3. Subimos el .app resultante (el que Xcode empaquetó en derivedDataPath)
-      
+            FRAMEWORK_SEARCH_PATHS=$(SRCROOT)/../composeApp/build/xcode-frameworks/debug/iphonesimulator
+
+      # 8. Subimos el .app generado como artifact
       - name: Upload iOS App to Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ios-simulator-app
-          path: "**/build/ios/Build/Products/Debug-iphonesimulator/*.app"
+          path: "build/ios/Build/Products/Debug-iphonesimulator/*.app"
           if-no-files-found: error
