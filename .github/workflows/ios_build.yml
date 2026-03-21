@@ -61,8 +61,8 @@ jobs:
             COMPILER_INDEX_STORE_ENABLE=NO \
             OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED=YES \
             ASSETCATALOG_COMPILER_SKIP_APP_ICON_VALIDATION=YES \
-            DEVELOPMENT_ASSET_PATHS="" \
-            FRAMEWORK_SEARCH_PATHS='$(SRCROOT)/../composeApp/build/xcode-frameworks/debug/iphonesimulator'
+            "DEVELOPMENT_ASSET_PATHS=" \
+            "FRAMEWORK_SEARCH_PATHS='$(SRCROOT)/../composeApp/build/xcode-frameworks/debug/iphonesimulator"
       # 3. Subimos el .app resultante (el que Xcode empaquetó en derivedDataPath)
       - name: Upload iOS App to Artifacts
         uses: actions/upload-artifact@v4
