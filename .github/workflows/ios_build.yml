@@ -44,7 +44,8 @@ jobs:
         run: |
         
           # Eliminamos la carpeta de previews para evitar el fallo de validación
-          find . -name "Preview Content" -type d -exec rm -rf {} +
+          rm -rf iosApp/iosApp/Preview\ Content
+          
           xcodebuild build \
             -project iosApp/iosApp.xcodeproj \
             -scheme iosApp \
