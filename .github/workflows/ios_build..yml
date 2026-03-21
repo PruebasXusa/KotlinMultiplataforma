@@ -42,15 +42,14 @@ jobs:
       # Añadimos clean y forzamos la arquitectura del simulador (arm64).
       - name: Build iOS app (Xcode)
         run: |
-        
           # Eliminamos la carpeta de previews para evitar el fallo de validación
           rm -rf iosApp/iosApp/Preview\ Content
-          
+
           xcodebuild build \
             -project iosApp/iosApp.xcodeproj \
             -scheme iosApp \
             -configuration Debug \
-            #-destination "generic/platform=iOS Simulator" \
+            -UseNewBuildSystem=YES \
             -destination "platform=iOS Simulator,name=iPhone 15,OS=latest" \
             -derivedDataPath build/ios \
             -sdk iphonesimulator \
@@ -65,9 +64,9 @@ jobs:
             COMPILER_INDEX_STORE_ENABLE=NO \
             OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED=YES \
             ASSETCATALOG_COMPILER_SKIP_APP_ICON_VALIDATION=YES \
-            "DEVELOPMENT_ASSET_PATHS=" \
-            "FRAMEWORK_SEARCH_PATHS=$(SRCROOT)/../composeApp/build/xcode-frameworks/debug/iphonesimulator"
-      # 3. Subimos el .app resultante (el que Xcode empaquetó en derivedDataPath)
+            DEVELOPMENT_ASSET_PATHS= \
+            FRAMEWORK_SEARCH_PATHS=$(SRCROOT)/../composeApp/build/xcode-frameworks/debug/iphonesimulator      # 3. Subimos el .app resultante (el que Xcode empaquetó en derivedDataPath)
+      
       - name: Upload iOS App to Artifacts
         uses: actions/upload-artifact@v4
         with:
