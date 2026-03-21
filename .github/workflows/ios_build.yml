@@ -32,15 +32,14 @@ jobs:
       - name: Build iOS Framework
         run: ./gradlew :composeApp:assembleDebugAppleFrameworkForXcode --stacktrace --info
 
-      - name: Build iOS App Archive
+
+      - name: Build iOS app
         run: |
           xcodebuild -project iosApp/iosApp.xcodeproj \
-                     -scheme iosApp \
-                     -configuration Debug \
-                     -destination 'platform=iOS Simulator,name=iPhone 15' \
-                     -derivedDataPath build/ios \
-                     build
-
+          -scheme iosApp \
+          -configuration Debug \
+          -destination "platform=iOS Simulator,name=iPhone SE (3rd generation),OS=latest" \
+          -derivedDataPath build/ios build
       # Opcional: Si quieres generar el archivo para Appetize.io
       - name: Build Simulator App
         run: ./gradlew :composeApp:iosSimulatorArm64Binaries
