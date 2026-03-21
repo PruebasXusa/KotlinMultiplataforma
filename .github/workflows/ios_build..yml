@@ -53,7 +53,7 @@ jobs:
             -scheme iosApp \
             -configuration Debug \
             -UseNewBuildSystem=YES \
-            -destination "platform=iOS Simulator,name=iPhone 15,OS=latest" \
+           -destination "platform=iOS Simulator" \
             -derivedDataPath build/ios \
             -sdk iphonesimulator \
             IPHONEOS_DEPLOYMENT_TARGET=15.0 \
@@ -68,8 +68,7 @@ jobs:
             OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED=YES \
             ASSETCATALOG_COMPILER_SKIP_APP_ICON_VALIDATION=YES \
             DEVELOPMENT_ASSET_PATHS= \
-            FRAMEWORK_SEARCH_PATHS=$(SRCROOT)/../composeApp/build/xcode-frameworks/debug/iphonesimulator
-
+            FRAMEWORK_SEARCH_PATHS=../composeApp/build/xcode-frameworks/debug/iphonesimulator
       # 8. Subimos el .app generado como artifact
       - name: Upload iOS App to Artifacts
         uses: actions/upload-artifact@v4
