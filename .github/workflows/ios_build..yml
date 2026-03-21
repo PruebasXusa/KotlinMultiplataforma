@@ -53,7 +53,7 @@ jobs:
             -scheme iosApp \
             -configuration Debug \
             -UseNewBuildSystem=YES \
-           -destination "platform=iOS Simulator" \
+            -destination "platform=iOS Simulator,id=dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder" \
             -derivedDataPath build/ios \
             -sdk iphonesimulator \
             IPHONEOS_DEPLOYMENT_TARGET=15.0 \
