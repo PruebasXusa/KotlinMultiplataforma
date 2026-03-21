@@ -42,13 +42,17 @@ jobs:
       # Añadimos clean y forzamos la arquitectura del simulador (arm64).
       - name: Build iOS app (Xcode)
         run: |
-          xcodebuild clean build \
+         # Eliminamos carpetas de preview que suelen dar error en CI
+          rm -rf iosApp/iosApp/Preview\ Content
+
+          xcodebuild build \
             -project iosApp/iosApp.xcodeproj \
             -scheme iosApp \
             -configuration Debug \
             -destination "generic/platform=iOS Simulator" \
             -derivedDataPath build/ios \
             -sdk iphonesimulator \
+            IPHONEOS_DEPLOYMENT_TARGET=15.0 \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             COMPILER_INDEX_STORE_ENABLE=NO \
