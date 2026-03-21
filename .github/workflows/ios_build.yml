@@ -50,7 +50,8 @@ jobs:
             -derivedDataPath build/ios \
             -sdk iphonesimulator \
             CODE_SIGNING_ALLOWED=NO \
-            COMPILER_INDEX_STORE_ENABLE=NO
+            COMPILER_INDEX_STORE_ENABLE=NO \
+            GRADLE_USER_HOME=$HOME/.gradle  # Ayuda a Xcode a encontrar Gradle
 
       # 3. Subimos el .app resultante (el que Xcode empaquetó en derivedDataPath)
       - name: Upload iOS App to Artifacts
