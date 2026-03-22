@@ -39,7 +39,7 @@ jobs:
       - name: Build iOS Simulator App
         run: |
           # Limpiamos previews para evitar errores
-          rm -rf iosApp/iosApp/Preview\ Content
+          # rm -rf iosApp/iosApp/Preview\ Content
         
           # Compilar usando Xcode para cualquier simulador
           xcodebuild build \
