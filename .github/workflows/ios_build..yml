@@ -38,14 +38,9 @@ jobs:
 
       - name: Build iOS Simulator App
         run: |
-          # Limpiamos previews para evitar errores
-          # rm -rf iosApp/iosApp/Preview\ Content
-        
-          # Compilar usando Xcode para cualquier simulador
           xcodebuild build \
             -project iosApp/iosApp.xcodeproj \
-            #-scheme iosApp \
-            -target iosApp \
+            -scheme iosApp \
             -configuration Debug \
             -destination "generic/platform=iOS Simulator" \
             -derivedDataPath build/ios \
