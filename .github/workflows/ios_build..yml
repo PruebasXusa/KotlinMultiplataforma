@@ -44,7 +44,8 @@ jobs:
           # Compilar usando Xcode para cualquier simulador
           xcodebuild build \
             -project iosApp/iosApp.xcodeproj \
-            -scheme iosApp \
+            #-scheme iosApp \
+            -target iosApp \
             -configuration Debug \
             -destination "generic/platform=iOS Simulator" \
             -derivedDataPath build/ios \
