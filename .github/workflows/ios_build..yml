@@ -46,7 +46,7 @@ jobs:
             -project iosApp/iosApp.xcodeproj \
             -scheme iosApp \
             -configuration Debug \
-            -destination "platform=iOS Simulator" \
+            -destination "platform:iOS, id:dvtdevice-DVTiPhonePlaceholder-iphoneos:placeholder, name:Any iOS Device" \
             -derivedDataPath build/ios \
             -sdk iphonesimulator \
             CODE_SIGNING_ALLOWED=NO \
