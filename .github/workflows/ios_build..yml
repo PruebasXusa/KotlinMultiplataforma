@@ -46,7 +46,7 @@ jobs:
             -project iosApp/iosApp.xcodeproj \
             -scheme iosApp \
             -configuration Debug \
-            -destination "platform=iOS Simulator,name=iPhone 15,OS=latest" \
+            -destination "generic/platform=iOS Simulator" \
             -derivedDataPath build/ios \
             -sdk iphonesimulator \
             CODE_SIGNING_ALLOWED=NO \
