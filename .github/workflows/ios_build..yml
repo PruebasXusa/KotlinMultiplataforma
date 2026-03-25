@@ -38,6 +38,7 @@ jobs:
             ARCHS="arm64" \
             ONLY_ACTIVE_ARCH=YES \
             IPHONEOS_DEPLOYMENT_TARGET=18.5 \
+            OTHER_LDFLAGS="-framework UIKit -framework Foundation -framework CoreGraphics" \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY=""
