@@ -35,8 +35,9 @@ jobs:
             -destination "generic/platform=iOS Simulator" \
             -derivedDataPath ./derived_data \
             -sdk iphonesimulator \
-            ONLY_ACTIVE_ARCH=YES \
             ARCHS="arm64" \
+            ONLY_ACTIVE_ARCH=YES \
+            IPHONEOS_DEPLOYMENT_TARGET=18.0 \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY=""
