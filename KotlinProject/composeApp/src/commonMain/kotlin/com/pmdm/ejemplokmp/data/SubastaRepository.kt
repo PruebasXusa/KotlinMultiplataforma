@@ -1,5 +1,6 @@
 package com.pmdm.ejemplokmp.data
 
+import com.pmdm.ejemplokmp.data.mocks.CuadroSubastaDaoMock
 import com.pmdm.ejemplokmp.modelo.CuadroSubasta
 import org.koin.core.annotation.Singleton
 

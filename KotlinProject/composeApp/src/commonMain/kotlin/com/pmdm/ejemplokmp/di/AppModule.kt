@@ -1,6 +1,6 @@
 package com.pmdm.ejemplokmp.di
 
-import com.pmdm.ejemplokmp.data.CuadroSubastaDaoMock
+import com.pmdm.ejemplokmp.data.mocks.CuadroSubastaDaoMock
 import com.pmdm.ejemplokmp.data.SubastaRepository
 import com.pmdm.ejemplokmp.ui.features.SubastaViewModel
 import org.koin.core.annotation.KoinApplication

@@ -1,4 +1,4 @@
-package com.pmdm.ejemplokmp.data
+package com.pmdm.ejemplokmp.data.mocks
 
 import kotlinproject.composeapp.generated.resources.Res
 import kotlinproject.composeapp.generated.resources.american_gothic

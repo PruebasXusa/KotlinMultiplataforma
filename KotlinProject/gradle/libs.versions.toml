@@ -28,7 +28,10 @@ lifecycleViewModel = "2.10.0"
 koin = "4.2.0"
 koin-plugin = "0.4.1"
 
-
+# Room
+room = "2.8.4"
+sqlite = "2.6.2"
+ksp = "2.0.20-1.0.25"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -57,13 +60,14 @@ androidx-lifecycle-viewmodel-navigation3 = { module = "org.jetbrains.androidx.li
 androidx-material3-navigation3 = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-navigation3", version.ref = "nav3Material" }
 
 #inyección mediante koin
-#koin-bom = {group ="io.insert-koin", name="koin-bom", version.ref="koin"}
-#koin-android = {group ="io.insert-koin", name="koin-android", version.ref="koin"}
 koin-core = {group ="io.insert-koin", name="koin-core", version.ref="koin"}
-#koin-compose= {group ="io.insert-koin", name="koin-compose", version.ref="koin"}
-#koin-compose-viewmodel ={group="io.insert-koin", name="koin-compose-viewmodel", version.ref="koin"}
 koin-compose-viewmodel = { group = "io.insert-koin", name="koin-compose-viewmodel" , version.ref = "koin" }
 koin-annotations = { group = "io.insert-koin", name="koin-annotations" , version.ref = "koin" }
+
+#Room
+androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -78,3 +82,7 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 
 #koin
 koin = { id = "io.insert-koin.compiler.plugin" , version.ref = "koin-plugin" }
+
+#Room
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+androidx-room = { id = "androidx.room", version.ref = "room" }

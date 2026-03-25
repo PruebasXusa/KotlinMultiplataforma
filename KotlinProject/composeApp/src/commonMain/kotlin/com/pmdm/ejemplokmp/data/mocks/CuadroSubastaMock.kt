@@ -1,4 +1,4 @@
-package com.pmdm.ejemplokmp.data
+package com.pmdm.ejemplokmp.data.mocks
 
 import org.jetbrains.compose.resources.DrawableResource
 

@@ -19,7 +19,7 @@ kotlin {
         }
     }
 
-    
+
     listOf(
         iosArm64(),
         iosSimulatorArm64()
@@ -32,32 +32,32 @@ kotlin {
 
 
     jvm()
-    
+
     js {
         browser()
         binaries.executable()
     }
-    
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         //.\gradlew :composeApp:wasmJsBrowserDevelopmentRun
-       /* Lo que ocurre por debajo cuando ejecutas wasmJsBrowserDevelopmentRun:
-        Gradle descarga Node.js automáticamente (lo gestiona el plugin de Kotlin/JS, no tienes que instalarlo tú).
-        Node ejecuta Webpack Dev Server.
-        Webpack Dev Server sirve tu app en http://localhost:8080 (o similar) y abre el navegador.
-        Puedes ver dónde lo descarga Gradle en:
-        C:\Users\usuario\.gradle\nodejs\
-        */
+        /* Lo que ocurre por debajo cuando ejecutas wasmJsBrowserDevelopmentRun:
+         Gradle descarga Node.js automáticamente (lo gestiona el plugin de Kotlin/JS, no tienes que instalarlo tú).
+         Node ejecuta Webpack Dev Server.
+         Webpack Dev Server sirve tu app en http://localhost:8080 (o similar) y abre el navegador.
+         Puedes ver dónde lo descarga Gradle en:
+         C:\Users\usuario\.gradle\nodejs\
+         */
         browser ()
         binaries.executable()
     }
-    
+
     sourceSets {
 
         androidMain.dependencies {
-        //    implementation(libs.compose.uiToolingPreview)
+            //    implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
-         //   implementation(libs.koin.android)
+            //   implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -138,9 +138,10 @@ compose.desktop {
     }
 }
 
-tasks.register("assembleDebugAppleFrameworkForXcode") {
+//Tarea para compilar en XCode en este caso no sirve porque se hace en GitHub Action
+/*tasks.register("assembleDebugAppleFrameworkForXcode") {
     group = "build"
     description = "Ensambla el framework de Debug para Xcode (compatibilidad)."
     // Dependencia directa al task generado por KMP para el framework debug del simulador ARM64.
     dependsOn(tasks.named("linkDebugFrameworkIosSimulatorArm64"))
-}
+}*/

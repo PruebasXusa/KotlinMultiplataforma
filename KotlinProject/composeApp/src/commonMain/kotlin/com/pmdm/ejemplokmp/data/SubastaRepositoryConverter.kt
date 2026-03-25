@@ -1,5 +1,6 @@
 package com.pmdm.ejemplokmp.data
 
+import com.pmdm.ejemplokmp.data.mocks.CuadroSubastaMock
 import com.pmdm.ejemplokmp.modelo.CuadroSubasta
 
 
