@@ -25,11 +25,6 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./KotlinProject/gradlew
 
-      # Forzamos la compilación del framework de Kotlin primero
-      - name: Pre-compile Kotlin Framework
-        working-directory: KotlinProject
-        run: ./gradlew :composeApp:assembleDebugAppleFrameworkForXcode
-
       - name: Build iOS Simulator App (Xcode)
         working-directory: KotlinProject
         run: |
