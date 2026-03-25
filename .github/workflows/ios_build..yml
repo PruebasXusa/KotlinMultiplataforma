@@ -38,12 +38,23 @@ jobs:
             -destination "generic/platform=iOS Simulator" \
             -derivedDataPath ../build/ios \
             -sdk iphonesimulator \
+            ONLY_ACTIVE_ARCH=NO \
+            ARCHS="x86_64 arm64" \
+            VALID_ARCHS="x86_64 arm64" \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
             DEVELOPMENT_TEAM="" \
             | xcpretty # Opcional: limpia el log si está instalado
+            PRODUCT_BUNDLE_IDENTIFIER="com.pmdm.ejemplokmp"
 
+      - name: Inspect App Bundle
+        run: |
+          APP_PATH=$(find build/ios -name "*.app" | head -n 1)
+          echo "Contenido de la App en $APP_PATH:"
+          ls -R "$APP_PATH"
+          echo "Verificando ejecutable..."
+          file "$APP_PATH/KotlinProject" || echo "EJECUTABLE NO ENCONTRADO"
       - name: Upload iOS App to Artifacts
         uses: actions/upload-artifact@v4
         with:
