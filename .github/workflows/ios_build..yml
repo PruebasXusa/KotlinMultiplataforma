@@ -8,16 +8,10 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest  # Esto le dice a GitHub que use un servidor Mac
-    defaults:
-      run:
-        working-directory: KotlinProject
-  
+    runs-on: macos-latest
+    
     steps:
-      - uses: actions/checkout@v4 # clona el repositorio en runner
-     
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
+      - uses: actions/checkout@v4
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -26,33 +20,34 @@ jobs:
           distribution: 'temurin'
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3 # cofigura gradlew en el runner
+        uses: gradle/actions/setup-gradle@v3
 
-      # Este comando compila el framework de iOS que luego se usa para enlazar la app
-      - name: Build iOS Framework
-        run: ./gradlew :composeApp:assembleDebugAppleFrameworkForXcode --stacktrace --info
+      - name: Make gradlew executable
+        run: chmod +x ./KotlinProject/gradlew
 
-      # Opcional: Si quieres generar el archivo para Appetize.io
-      - name: Build Simulator App
-        run: ./gradlew :composeApp:iosSimulatorArm64Binaries
+      # NO ejecutes assembleDebugAppleFramework manualmente antes de Xcode
+      # Xcode lo llamará automáticamente. Solo asegúrate de que las rutas son correctas.
 
-      - name: Build iOS Simulator App
+      - name: Build iOS Simulator App (Xcode)
+        working-directory: KotlinProject # Entramos a la carpeta del proyecto
         run: |
           xcodebuild build \
             -project iosApp/iosApp.xcodeproj \
             -scheme iosApp \
             -configuration Debug \
             -destination "generic/platform=iOS Simulator" \
-            -derivedDataPath build/ios \
+            -derivedDataPath ../build/ios \
             -sdk iphonesimulator \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
-            DEVELOPMENT_TEAM=""
+            DEVELOPMENT_TEAM="" \
+            | xcpretty # Opcional: limpia el log si está instalado
 
       - name: Upload iOS App to Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ios-simulator-app
-          path: "KotlinProject/build/ios/Build/Products/Debug-iphonesimulator/*.app"
+          # Ajustamos la ruta al path real donde Xcode deja el .app
+          path: build/ios/Build/Products/Debug-iphonesimulator/*.app
           if-no-files-found: error
