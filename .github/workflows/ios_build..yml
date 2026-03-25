@@ -1,4 +1,4 @@
-name: iOS Build Check
+name: iOS Build for Appetize
 
 on:
   push:
@@ -25,40 +25,36 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./KotlinProject/gradlew
 
-      # NO ejecutes assembleDebugAppleFramework manualmente antes de Xcode
-      # Xcode lo llamará automáticamente. Solo asegúrate de que las rutas son correctas.
+      # Forzamos la compilación del framework de Kotlin primero
+      - name: Pre-compile Kotlin Framework
+        working-directory: KotlinProject
+        run: ./gradlew :composeApp:assembleDebugAppleFrameworkForXcode
 
       - name: Build iOS Simulator App (Xcode)
-        working-directory: KotlinProject # Entramos a la carpeta del proyecto
+        working-directory: KotlinProject
         run: |
           xcodebuild build \
             -project iosApp/iosApp.xcodeproj \
             -scheme iosApp \
             -configuration Debug \
             -destination "generic/platform=iOS Simulator" \
-            -derivedDataPath ../build/ios \
+            -derivedDataPath ./derived_data \
             -sdk iphonesimulator \
             ONLY_ACTIVE_ARCH=NO \
             ARCHS="x86_64 arm64" \
-            VALID_ARCHS="x86_64 arm64" \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGN_IDENTITY="" \
-            DEVELOPMENT_TEAM="" \
-            | xcpretty # Opcional: limpia el log si está instalado
-            PRODUCT_BUNDLE_IDENTIFIER="com.pmdm.ejemplokmp"
+            CODE_SIGN_IDENTITY=""
 
-      - name: Inspect App Bundle
-        run: |
-          APP_PATH=$(find build/ios -name "*.app" | head -n 1)
-          echo "Contenido de la App en $APP_PATH:"
-          ls -R "$APP_PATH"
-          echo "Verificando ejecutable..."
-          file "$APP_PATH/KotlinProject" || echo "EJECUTABLE NO ENCONTRADO"
+      # Este paso te dirá en el log exactamente dónde se guardó el .app
+      - name: Locate App Bundle
+        run: find . -name "*.app" -type d
+
       - name: Upload iOS App to Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ios-simulator-app
-          # Ajustamos la ruta al path real donde Xcode deja el .app
-          path: build/ios/Build/Products/Debug-iphonesimulator/*.app
+          # Usamos un patrón de búsqueda global para evitar errores de ruta
+          path: "**/derived_data/**/*.app"
           if-no-files-found: error
+
