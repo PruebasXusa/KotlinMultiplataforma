@@ -32,7 +32,7 @@ jobs:
             -project iosApp/iosApp.xcodeproj \
             -scheme iosApp \
             -configuration Debug \
-            -destination "platform=iOS Simulator,id=dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder" \
+            -destination "generic/platform=iOS Simulator" \
             -derivedDataPath ./derived_data \
             -sdk iphonesimulator \
             ONLY_ACTIVE_ARCH=YES \
