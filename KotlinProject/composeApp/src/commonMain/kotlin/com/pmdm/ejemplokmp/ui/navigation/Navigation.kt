@@ -47,13 +47,13 @@ fun Navigation(viewModel: SubastaViewModel) {
 
             subastaDestination(
                 subastaUiState = viewModel.subastaUiState,
-                onBack = { backStack.removeLastOrNull() },
+                onBack = { },
                 onNavigateToNext = {
                    backStack.add(
                         ResultadoSubasta
                     )
                 })
-            restultadoSubastaDestination({  })
+            restultadoSubastaDestination({  backStack.removeLastOrNull() })
 
         })
 }

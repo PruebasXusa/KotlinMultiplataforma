@@ -9,8 +9,10 @@ import kotlinproject.composeapp.generated.resources.starry_night
 import kotlinproject.composeapp.generated.resources.the_creation_of_adam
 import kotlinproject.composeapp.generated.resources.the_persistence_of_memory
 import kotlinproject.composeapp.generated.resources.the_scream
+import org.koin.core.annotation.Singleton
 
 
+@Singleton
 class CuadroSubastaDaoMock {
 
     val cuadros = listOf(

@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.koin) // Complemento del compilador Koin
 }
 
 kotlin {
@@ -28,7 +29,8 @@ kotlin {
             isStatic = true
         }
     }
-    
+
+
     jvm()
     
     js {
@@ -52,12 +54,10 @@ kotlin {
     
     sourceSets {
 
-
-
         androidMain.dependencies {
         //    implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
-            implementation(libs.koin.android)
+         //   implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -78,10 +78,11 @@ kotlin {
             implementation(libs.androidx.material3.navigation3)
             implementation(libs.androidx.lifecycle.viewmodel.navigation3)
 
-            implementation(project.dependencies.platform (libs.koin.bom))
             implementation(libs.koin.core)
-            implementation(libs.koin.compose)
+
             implementation(libs.koin.compose.viewmodel)
+            implementation(libs.koin.annotations)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
